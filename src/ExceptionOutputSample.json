@@ -1,0 +1,32 @@
+{
+  "@t": "2019-04-09T22:58:32.4355649Z",
+  "@mt": "Complex exception intercepted.",
+  "@l": "Error",
+  "@x": "System.InvalidOperationException: Outer exception ---> System.ArgumentNullException: Value cannot be null.\r\nParameter name: 42\r\n   at TenantSample.BL.RepositoryUsingService.Read() in D:\\Projects\\TetantSample\\src\\TenantSample.BL\\RepositoryUsingService.cs:line 35\r\n   --- End of inner exception stack trace ---\r\n   at TenantSample.BL.RepositoryUsingService.Read() in D:\\Projects\\TetantSample\\src\\TenantSample.BL\\RepositoryUsingService.cs:line 39",
+  "SourceContext": "TenantSample.BL.RepositoryUsingService",
+  "ActionId": "e536ea9f-94ab-47f4-9173-be2e254237ff",
+  "ActionName": "TenantSample.Api.Controllers.TestController.GetRepository (TenantSample.Api)",
+  "RequestId": "0HLLT7RD55OK6:00000003",
+  "RequestPath": "/api/v1/repo",
+  "Application": "TenantSample",
+  "ExceptionDetail": {
+    "Type": "System.InvalidOperationException",
+    "HResult": -2146233079,
+    "Message": "Outer exception",
+    "Source": "TenantSample.BL",
+    "InnerException": {
+      "Type": "System.ArgumentNullException",
+      "Data": {
+        "prop1": "value1",
+        "prop2": {
+          "A": 1,
+          "B": "abc"
+        }
+      },
+      "HResult": -2147467261,
+      "Message": "Value cannot be null.\r\nParameter name: 42",
+      "Source": "TenantSample.BL",
+      "ParamName": "42"
+    }
+  }
+}

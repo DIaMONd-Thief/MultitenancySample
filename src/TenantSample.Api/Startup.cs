@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Serilog;
+using Serilog.Enrichers.AspNetCore;
 using TenantSample.Api.Common;
 using TenantSample.BL;
 using TenantSample.Common.Abstractions;
@@ -32,6 +34,7 @@ namespace TenantSample.Api
             services.AddDal("testContext");
             services.AddCoreServices();
             services.AddHttpContextAccessor();
+            services.AddHttpContextMiddleware();
             services.AddScoped<ITenantIdProvider, HttpConextTenantProvider>();
         }
 
@@ -44,6 +47,7 @@ namespace TenantSample.Api
             }
 
             app.UseMvc();
+            app.UseHttpContextMiddleware();
         }
     }
 }

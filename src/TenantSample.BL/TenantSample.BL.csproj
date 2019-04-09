@@ -12,4 +12,10 @@
     <ProjectReference Include="..\TenantSample.Dal\TenantSample.Dal.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>C:\Users\DIaMONd-Thief\.nuget\packages\microsoft.extensions.logging.abstractions\2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

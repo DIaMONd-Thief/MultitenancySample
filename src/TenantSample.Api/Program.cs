@@ -7,6 +7,11 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Core;
+using Serilog.Enrichers.AspNetCore;
+using Serilog.Exceptions;
+using TenantSample.Logging;
 
 namespace TenantSample.Api
 {
@@ -17,9 +22,29 @@ namespace TenantSample.Api
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .AddEnvironmentVariables()
+            .Build();
+
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging((context, builder) =>
+                {
+                    builder.ClearProviders();
+                    builder.AddSerilog();
+                })
                 .UseStartup<Startup>()
+                .UseConfiguration(Configuration)
+                .UseSerilog((context, config) =>
+                {
+                    config.ReadFrom.Configuration(Configuration)
+                        .Enrich.WithExceptionDetails();
+                })
                 .Build();
+        }
+
     }
 }
